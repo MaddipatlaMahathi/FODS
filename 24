@@ -1,0 +1,33 @@
+import numpy as np
+from scipy import stats
+
+# Input dataset
+data = np.array([
+    10.2, 11.1, 9.8, 10.5, 11.3,
+    10.7, 9.9, 10.4, 11.0, 10.6
+])
+
+# User input
+sample_size = int(input("Enter sample size: "))
+confidence = float(input("Enter confidence level (e.g. 0.95): "))
+precision = float(input("Enter desired precision: "))
+
+# Select sample
+sample = data[:sample_size]
+
+# Point estimate
+mean = np.mean(sample)
+
+# Confidence interval
+sem = stats.sem(sample)
+ci = stats.t.interval(
+    confidence,
+    df=len(sample)-1,
+    loc=mean,
+    scale=sem
+)
+
+print("\nSample Mean:", round(mean, 2))
+print("Confidence Interval:",
+      (round(ci[0], 2), round(ci[1], 2)))
+print("Desired Precision:", precision)
