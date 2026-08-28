@@ -1,0 +1,30 @@
+import pandas as pd
+from collections import Counter
+import re
+
+# Input dataset
+data = {
+    "Review": [
+        "good product and good quality",
+        "excellent product with good quality",
+        "good product and excellent service"
+    ]
+}
+
+df = pd.DataFrame(data)
+
+# Combine all reviews
+text = " ".join(df["Review"])
+
+# Convert to lowercase
+text = text.lower()
+
+# Extract words
+words = re.findall(r'\b\w+\b', text)
+
+# Frequency distribution
+frequency = Counter(words)
+
+print("Word Frequency:")
+for word, count in frequency.most_common():
+    print(word, ":", count)
