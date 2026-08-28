@@ -1,0 +1,31 @@
+import numpy as np
+from scipy import stats
+
+# Input data
+drug = np.array([12, 15, 10, 14, 13, 11, 16, 12, 14, 15])
+placebo = np.array([5, 7, 6, 8, 5, 9, 6, 7, 5, 8])
+
+# Function to calculate confidence interval
+def confidence_interval(data):
+    mean = np.mean(data)
+    sem = stats.sem(data)
+    ci = stats.t.interval(
+        confidence=0.95,
+        df=len(data)-1,
+        loc=mean,
+        scale=sem
+    )
+    return mean, ci
+
+drug_mean, drug_ci = confidence_interval(drug)
+placebo_mean, placebo_ci = confidence_interval(placebo)
+
+print("Drug Group")
+print("Mean Reduction:", round(drug_mean, 2))
+print("95% Confidence Interval:", 
+      (round(drug_ci[0], 2), round(drug_ci[1], 2)))
+
+print("\nPlacebo Group")
+print("Mean Reduction:", round(placebo_mean, 2))
+print("95% Confidence Interval:",
+      (round(placebo_ci[0], 2), round(placebo_ci[1], 2)))
