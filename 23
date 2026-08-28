@@ -1,0 +1,24 @@
+import numpy as np
+from scipy.stats import ttest_ind
+
+# Input data
+design_A = np.array([72, 75, 70, 68, 74, 77, 73, 71, 76, 74])
+design_B = np.array([80, 82, 78, 85, 81, 79, 84, 83, 80, 82])
+
+# Calculate means
+mean_A = np.mean(design_A)
+mean_B = np.mean(design_B)
+
+# Independent t-test
+t_stat, p_value = ttest_ind(design_A, design_B)
+
+print("Mean Conversion Rate - Design A:", mean_A)
+print("Mean Conversion Rate - Design B:", mean_B)
+
+print("\nT-statistic:", round(t_stat, 2))
+print("P-value:", round(p_value, 4))
+
+if p_value < 0.05:
+    print("There is a statistically significant difference.")
+else:
+    print("There is no statistically significant difference.")
