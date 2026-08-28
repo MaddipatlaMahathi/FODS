@@ -1,0 +1,36 @@
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+
+# Input dataset
+data = {
+    "Usage_Minutes": [100, 150, 200, 250, 300, 350, 400, 450],
+    "Contract_Months": [24, 24, 18, 12, 12, 6, 6, 3],
+    "Churn": [0, 0, 0, 0, 1, 1, 1, 1]
+}
+
+df = pd.DataFrame(data)
+
+# Features and target
+X = df[["Usage_Minutes", "Contract_Months"]]
+y = df["Churn"]
+
+# Train model
+model = LogisticRegression()
+model.fit(X, y)
+
+# New customer input
+usage = 320
+contract = 6
+
+new_customer = [[usage, contract]]
+
+# Prediction
+prediction = model.predict(new_customer)
+
+print("Usage Minutes:", usage)
+print("Contract Duration:", contract)
+
+if prediction[0] == 1:
+    print("\nPrediction: Customer will churn")
+else:
+    print("\nPrediction: Customer will not churn")
