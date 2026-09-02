@@ -1,0 +1,55 @@
+import pandas as pd
+import re
+from collections import Counter
+import matplotlib.pyplot as plt
+
+# Input dataset
+data = {
+    "feedback": [
+        "The product is very good and useful!",
+        "Good product and excellent quality.",
+        "The quality is good and the product is useful.",
+        "Excellent product with good quality."
+    ]
+}
+
+df = pd.DataFrame(data)
+
+# Stop words
+stop_words = {"the", "is", "and", "a", "an", "with", "very"}
+
+# Combine all feedback
+text = " ".join(df["feedback"])
+
+# Convert to lowercase
+text = text.lower()
+
+# Remove punctuation and extract words
+words = re.findall(r'\b\w+\b', text)
+
+# Remove stop words
+words = [word for word in words if word not in stop_words]
+
+# Frequency distribution
+frequency = Counter(words)
+
+# User input
+N = int(input("Enter number of top words: "))
+
+# Top N words
+top_words = frequency.most_common(N)
+
+print("\nTop", N, "Most Frequent Words:")
+
+for word, count in top_words:
+    print(word, ":", count)
+
+# Plot
+words_plot = [x[0] for x in top_words]
+counts_plot = [x[1] for x in top_words]
+
+plt.bar(words_plot, counts_plot)
+plt.xlabel("Words")
+plt.ylabel("Frequency")
+plt.title("Top Frequent Words")
+plt.show()

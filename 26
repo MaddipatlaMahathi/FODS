@@ -1,0 +1,29 @@
+import numpy as np
+from scipy.stats import ttest_ind
+import matplotlib.pyplot as plt
+
+# Input data
+control = np.array([120, 125, 118, 130, 122, 128, 124, 121, 126, 123])
+treatment = np.array([110, 112, 108, 115, 111, 109, 113, 107, 114, 110])
+
+# Perform t-test
+t_stat, p_value = ttest_ind(control, treatment)
+
+print("Control Mean:", np.mean(control))
+print("Treatment Mean:", np.mean(treatment))
+print("\nT-statistic:", round(t_stat, 2))
+print("P-value:", round(p_value, 4))
+
+if p_value < 0.05:
+    print("Reject Null Hypothesis")
+    print("Treatment has a statistically significant effect.")
+else:
+    print("Fail to Reject Null Hypothesis")
+    print("Treatment does not have a statistically significant effect.")
+
+# Visualization
+plt.boxplot([control, treatment],
+            labels=["Control", "Treatment"])
+plt.ylabel("Blood Pressure")
+plt.title("Control vs Treatment")
+plt.show()

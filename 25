@@ -1,0 +1,30 @@
+import pandas as pd
+from scipy import stats
+
+# Input dataset
+data = {
+    "Rating": [4, 5, 3, 4, 5, 4, 3, 5, 4, 4]
+}
+
+df = pd.DataFrame(data)
+
+# Calculate mean
+mean_rating = df["Rating"].mean()
+
+# Standard error
+sem = stats.sem(df["Rating"])
+
+# 95% confidence interval
+ci = stats.t.interval(
+    0.95,
+    df=len(df)-1,
+    loc=mean_rating,
+    scale=sem
+)
+
+print("Customer Ratings:")
+print(df)
+
+print("\nMean Rating:", mean_rating)
+print("95% Confidence Interval:",
+      (round(ci[0], 2), round(ci[1], 2)))

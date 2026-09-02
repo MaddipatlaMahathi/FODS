@@ -1,0 +1,31 @@
+import numpy as np
+from sklearn.cluster import KMeans
+
+# Input dataset
+X = np.array([
+    [10, 1000],
+    [12, 1200],
+    [15, 1500],
+    [50, 5000],
+    [55, 5500],
+    [60, 6000],
+    [90, 9000],
+    [95, 9500],
+    [100, 10000]
+])
+
+# K-Means model
+model = KMeans(n_clusters=3, random_state=42, n_init=10)
+model.fit(X)
+
+# New customer
+new_customer = [[52, 5200]]
+
+# Predict cluster
+cluster = model.predict(new_customer)
+
+print("New Customer:")
+print("Visits:", new_customer[0][0])
+print("Spending:", new_customer[0][1])
+
+print("\nCustomer belongs to Cluster:", cluster[0])

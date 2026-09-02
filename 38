@@ -1,0 +1,33 @@
+import pandas as pd
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+
+# Input dataset
+data = {
+    "Customer": ["A", "B", "C", "D", "E", "F", "G", "H"],
+    "Spending": [1000, 1200, 1500, 5000, 5500, 6000, 9000, 9500],
+    "Visits": [10, 12, 15, 50, 55, 60, 90, 95]
+}
+
+df = pd.DataFrame(data)
+
+# Features
+X = df[["Spending", "Visits"]]
+
+# K-Means
+model = KMeans(n_clusters=3, random_state=42, n_init=10)
+df["Cluster"] = model.fit_predict(X)
+
+print(df)
+
+# Visualization
+plt.scatter(
+    df["Spending"],
+    df["Visits"],
+    c=df["Cluster"]
+)
+
+plt.xlabel("Spending")
+plt.ylabel("Visits")
+plt.title("Customer Segmentation")
+plt.show()

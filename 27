@@ -1,0 +1,46 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Create input dataset
+data = {
+    "Name": ["Ravi", "John", "Alex", "David", "Mike", "Sam", "Leo"],
+    "Age": [22, 25, 28, 24, 30, 27, 23],
+    "Position": ["Forward", "Midfielder", "Forward",
+                 "Defender", "Midfielder", "Forward", "Defender"],
+    "Goals": [18, 12, 20, 8, 15, 22, 10],
+    "Salary": [50000, 45000, 70000, 40000, 60000, 80000, 42000]
+}
+
+df = pd.DataFrame(data)
+
+# Save CSV
+df.to_csv("players.csv", index=False)
+
+# Read CSV
+df = pd.read_csv("players.csv")
+
+# Top 5 goals
+print("Top 5 Players by Goals:")
+print(df.nlargest(5, "Goals")[["Name", "Goals"]])
+
+# Top 5 salaries
+print("\nTop 5 Players by Salary:")
+print(df.nlargest(5, "Salary")[["Name", "Salary"]])
+
+# Average age
+average_age = df["Age"].mean()
+
+print("\nAverage Age:", average_age)
+
+# Players above average age
+print("\nPlayers Above Average Age:")
+print(df[df["Age"] > average_age]["Name"])
+
+# Position distribution
+position_count = df["Position"].value_counts()
+
+position_count.plot(kind="bar")
+plt.xlabel("Position")
+plt.ylabel("Number of Players")
+plt.title("Players by Position")
+plt.show()

@@ -1,0 +1,15 @@
+prices = [50, 100, 30]
+quantities = [2, 1, 5]
+discount_rate = 10
+tax_rate = 5
+total_amount = 0
+for i in range(len(prices)):
+    total_amount += prices[i] * quantities[i]
+discount = (discount_rate / 100) * total_amount
+amount_after_discount = total_amount - discount
+tax = (tax_rate / 100) * amount_after_discount
+final_amount = amount_after_discount + tax
+print("Total Amount Before Discount:", total_amount)
+print("Discount Amount:", discount)
+print("Tax Amount:", tax)
+print("Final Amount to Pay:", final_amount)

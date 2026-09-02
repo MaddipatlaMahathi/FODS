@@ -1,0 +1,13 @@
+from collections import Counter
+import string
+
+with open("sample_text.txt", "r") as file:
+    text = file.read().lower()
+
+words = text.translate(str.maketrans("", "", string.punctuation)).split()
+
+frequency = Counter(words)
+
+print("Word Frequency Distribution:")
+for word, count in frequency.items():
+    print(word, ":", count)

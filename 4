@@ -1,0 +1,13 @@
+import numpy as np
+
+# Quarterly sales
+sales_data = np.array([50000, 60000, 70000, 90000])
+
+# Total sales
+total_sales = np.sum(sales_data)
+
+# Percentage increase from Q1 to Q4
+percentage_increase = ((sales_data[3] - sales_data[0]) / sales_data[0]) * 100
+
+print("Total Sales:", total_sales)
+print("Percentage Increase:", percentage_increase, "%")
